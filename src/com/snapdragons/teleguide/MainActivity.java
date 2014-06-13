@@ -75,8 +75,7 @@ public class MainActivity extends TabActivity {
 				break;
 				
 			case R.id.viewshows:
-				Intent a = new Intent("com.example.protest.VIEWSHOWS");
-				startActivity(a);
+				startActivity(new Intent(MainActivity.this, ViewShows.class));
 				break;
 				
 				

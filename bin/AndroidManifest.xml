@@ -58,6 +58,35 @@
                 <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
         </activity>
+        
+        <activity
+            android:name="com.snapdragons.teleguide.Popular"
+            android:label="@string/app_name" >
+            <intent-filter>
+                <action android:name="android.intent.action.POPULAR" />
+
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+        </activity>
+        <activity
+            android:name="com.snapdragons.teleguide.Trending"
+            android:label="@string/app_name" >
+            <intent-filter>
+                <action android:name="android.intent.action.TRENDING" />
+
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+        </activity>
+        <activity
+            android:name="com.snapdragons.teleguide.ViewShows"
+            android:label="@string/app_name" >
+            <intent-filter>
+                <action android:name="android.intent.action.VIEWSHOWS" />
+
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+        </activity>
+        
     </application>
 
 </manifest>
