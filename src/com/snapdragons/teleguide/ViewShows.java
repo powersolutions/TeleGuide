@@ -16,36 +16,29 @@ import android.widget.TabHost.TabSpec;
 import android.os.Build;
 
 
-public class MainActivity extends TabActivity {
+public class ViewShows extends TabActivity {
 	TabHost mTabHost;
 	
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		setContentView(R.layout.activity_main);
+		setContentView(R.layout.viewshows);
 		mTabHost=getTabHost();
 		
-		
 		TabSpec firstSpec=mTabHost.newTabSpec("First");
-		firstSpec.setIndicator("Today Shows", null);
-		Intent firstIntent=new Intent(MainActivity.this,FirstActivity.class);
+		firstSpec.setIndicator("Trending", null);
+		Intent firstIntent=new Intent(this,Trending.class);
 		firstSpec.setContent(firstIntent);
 		
 		TabSpec secondSpec=mTabHost.newTabSpec("Second");
-		secondSpec.setIndicator("Upcomming", null);
-		Intent secondIntent=new Intent(MainActivity.this,SecondActivity.class);
+		secondSpec.setIndicator("Popular", null);
+		Intent secondIntent=new Intent(this,Popular.class);
 		secondSpec.setContent(secondIntent);
-		
-		TabSpec thirdSpec=mTabHost.newTabSpec("Third");
-		thirdSpec.setIndicator("Recent", null);
-		Intent thirdIntent=new Intent(MainActivity.this,ThirdActivity.class);
-		thirdSpec.setContent(thirdIntent);
-		
 		
 		mTabHost.addTab(firstSpec);
 		mTabHost.addTab(secondSpec);
-		mTabHost.addTab(thirdSpec);
+		
 		
 		
         }

@@ -26,17 +26,28 @@ public final class R {
         public static final int start=0x7f020001;
     }
     public static final class id {
-        public static final int action_settings=0x7f090003;
-        public static final int container=0x7f090000;
-        public static final int imageView1=0x7f090001;
+        public static final int action_settings=0x7f090004;
+        public static final int linearLayout1=0x7f090000;
+        public static final int myshows=0x7f090005;
+        public static final int searchshows=0x7f090006;
+        public static final int tabhost=0x7f090003;
+        public static final int textView1=0x7f090001;
         public static final int videoView1=0x7f090002;
+        public static final int viewshows=0x7f090007;
     }
     public static final class layout {
         public static final int activity_main=0x7f030000;
-        public static final int splash=0x7f030001;
+        public static final int first=0x7f030001;
+        public static final int popular=0x7f030002;
+        public static final int second=0x7f030003;
+        public static final int splash=0x7f030004;
+        public static final int third=0x7f030005;
+        public static final int trending=0x7f030006;
+        public static final int viewshows=0x7f030007;
     }
     public static final class menu {
         public static final int main=0x7f080000;
+        public static final int main12=0x7f080001;
     }
     public static final class raw {
         public static final int intro=0x7f040000;

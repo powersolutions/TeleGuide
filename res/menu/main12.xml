@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android" >
+     <item
+        android:id="@+id/myshows"
+        android:title="My Shows">
+    </item>
+    <item
+        android:id="@+id/searchshows"
+        android:title="Search Shows">
+    </item>
+    <item
+        android:id="@+id/viewshows"
+        android:title="View Shows">
+    </item>
+</menu>

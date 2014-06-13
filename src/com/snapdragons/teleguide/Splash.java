@@ -10,6 +10,7 @@ import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.MediaController;
 import android.widget.VideoView;
+import android.content.*;
 
 public class Splash extends Activity implements OnClickListener {
 
@@ -32,7 +33,9 @@ public class Splash extends Activity implements OnClickListener {
 			}
 
 			public void onFinish() {
-				startActivity(new Intent(Splash.this, MainActivity.class));
+				startActivity(new Intent(Splash.this,MainActivity.class));
+				
+				
 			}
 
 		}.start();
