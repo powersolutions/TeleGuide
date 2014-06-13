@@ -8,6 +8,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.Menu;
+import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
@@ -46,8 +47,43 @@ public class MainActivity extends TabActivity {
 		mTabHost.addTab(firstSpec);
 		mTabHost.addTab(secondSpec);
 		mTabHost.addTab(thirdSpec);
-		
-		
-        }
 	}
+		
+		
+		@Override
+		public boolean onCreateOptionsMenu(android.view.Menu menu) {
+			// TODO Auto-generated method stub
+			super.onCreateOptionsMenu(menu);
+			MenuInflater blowUp = getMenuInflater();
+			blowUp.inflate(R.menu.main12, menu);
+			return true;
+		}
+
+		@Override
+		public boolean onOptionsItemSelected(MenuItem item) {
+			// TODO Auto-generated method stub
+			switch (item.getItemId()) {
+			
+			case R.id.myshows:
+				Intent i = new Intent("com.example.protest.MYSHOWS");
+				startActivity(i);
+				
+				break;
+			case R.id.searchshows:
+				Intent p = new Intent("com.example.protest.SEARCHSHOWS");
+				startActivity(p);
+				break;
+				
+			case R.id.viewshows:
+				Intent a = new Intent("com.example.protest.VIEWSHOWS");
+				startActivity(a);
+				break;
+				
+				
+			}
+			return false;
+		}	
+	
+        }
+	
 
