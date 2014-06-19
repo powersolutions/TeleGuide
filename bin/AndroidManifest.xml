@@ -17,43 +17,43 @@
             android:name="com.snapdragons.teleguide.MainActivity"
             android:label="@string/app_name" >
             <intent-filter>
-                <action android:name="android.intent.action.MAINACTIVITY" />
-
-                <category android:name="android.intent.category.DEFAULT" />
-            </intent-filter>
-        </activity>
-        <activity
-            android:name="com.snapdragons.teleguide.Splash"
-            android:label="@string/app_name" >
-            <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
         <activity
-            android:name="com.snapdragons.teleguide.FirstActivity"
+            android:name="com.snapdragons.teleguide.Splash"
             android:label="@string/app_name" >
             <intent-filter>
-                <action android:name="android.intent.action.FIRSTACTIVITY" />
+                <action android:name="android.intent.action.SPLASH" />
 
                 <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
         </activity>
         <activity
-            android:name="com.snapdragons.teleguide.SecondActivity"
+            android:name="com.snapdragons.teleguide.TodayShow"
             android:label="@string/app_name" >
             <intent-filter>
-                <action android:name="android.intent.action.SECONDACTIVITY" />
+                <action android:name="android.intent.action.TODAYSHOW" />
 
                 <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
         </activity>
         <activity
-            android:name="com.snapdragons.teleguide.ThirdActivity"
+            android:name="com.snapdragons.teleguide.Upcomming"
             android:label="@string/app_name" >
             <intent-filter>
-                <action android:name="android.intent.action.THIRDACTIVITY" />
+                <action android:name="android.intent.action.UPCOMMING" />
+
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+        </activity>
+        <activity
+            android:name="com.snapdragons.teleguide.Recent"
+            android:label="@string/app_name" >
+            <intent-filter>
+                <action android:name="android.intent.action.RECENT" />
 
                 <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
@@ -82,6 +82,24 @@
             android:label="@string/app_name" >
             <intent-filter>
                 <action android:name="android.intent.action.VIEWSHOWS" />
+
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+        </activity>
+        <activity
+            android:name="com.snapdragons.teleguide.MyShows"
+            android:label="@string/app_name" >
+            <intent-filter>
+                <action android:name="android.intent.action.MYSHOWS" />
+
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+        </activity>
+        <activity
+            android:name="com.snapdragons.teleguide.SearchShows"
+            android:label="@string/app_name" >
+            <intent-filter>
+                <action android:name="android.intent.action.SEARCHSHOWS" />
 
                 <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>

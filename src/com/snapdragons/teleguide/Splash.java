@@ -39,6 +39,8 @@ public class Splash extends Activity implements OnClickListener {
 			}
 
 		}.start();
+		
+		
 	}
 
 	@Override
@@ -49,6 +51,7 @@ public class Splash extends Activity implements OnClickListener {
 	}
 
 	private void init() {
+		
 		String uriPath = "android.resource://" + getPackageName() + "/"
 				+ R.raw.mm;
 

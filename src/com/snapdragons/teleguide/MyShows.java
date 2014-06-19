@@ -3,12 +3,17 @@ package com.snapdragons.teleguide;
 import android.app.Activity;
 import android.os.Bundle;
 
-public class SecondActivity extends Activity {
+public class MyShows extends Activity{
+
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		// TODO Auto-generated method stub
 		super.onCreate(savedInstanceState);
-		setContentView(R.layout.second);
+		setContentView(R.layout.myshows);
+		init();
 	}
 
+	private void init(){
+		
+	}
 }

@@ -3,7 +3,7 @@ package com.snapdragons.teleguide;
 import android.app.Activity;
 import android.os.Bundle;
 
-public class ThirdActivity extends Activity {
+public class Recent extends Activity {
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
