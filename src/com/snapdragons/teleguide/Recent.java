@@ -9,7 +9,7 @@ public class Recent extends Activity {
 	protected void onCreate(Bundle savedInstanceState) {
 		// TODO Auto-generated method stub
 		super.onCreate(savedInstanceState);
-		setContentView(R.layout.third);
+		setContentView(R.layout.recent);
 	}
 	
 
