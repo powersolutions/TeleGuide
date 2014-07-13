@@ -70,6 +70,11 @@ public class MainActivity extends TabActivity {
 		case R.id.viewshows:
 			startActivity(new Intent(MainActivity.this, ViewShows.class));
 			break;
+		case R.id.reload:
+			
+			finish();
+			startActivity(getIntent());
+			break;
 
 		}
 		return false;

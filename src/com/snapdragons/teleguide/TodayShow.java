@@ -33,11 +33,14 @@ import com.snapdragons.teleguide.TodayAdapter;
 import android.app.Activity;
 import android.app.ProgressDialog;
 import android.content.Context;
+import android.content.Intent;
 import android.media.MediaRouter.VolumeCallback;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.Toast;
@@ -50,6 +53,7 @@ public class TodayShow extends Activity {
 		// TODO Auto-generated method stub
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.today);
+		grid = (GridView) findViewById(R.id.gridView1);
 		init();
 	}
 
@@ -63,28 +67,58 @@ public class TodayShow extends Activity {
 
 	public static Boolean state = false;
 
-	static final String[] test = new String[] { "Android", "iOS" };
-	static final String[] test1 = new String[] {
-			"http://i.stack.imgur.com/aZkGv.jpg",
-			"http://i.stack.imgur.com/aZkGv.jpg" };
+	// static final String[] test = new String[] { "Android", "iOS" };
+	/*
+	 * static final String[] test1 = new String[] {
+	 * "http://i.stack.imgur.com/aZkGv.jpg",
+	 * "http://i.stack.imgur.com/aZkGv.jpg" };
+	 */
+
 
 	private void init() {
-		grid = (GridView) findViewById(R.id.gridView1);
+		
 
-		try {
+		if (temp.size() == 0 && templ.size() == 0) {
+			try {
+				
+				// read the xml from the web
+				temp.clear();
+				templ.clear();
+				readXml();
 
-			// read the xml from the web
+				// convert string lists to string arrays
 
-			 readXml();
+				String[] itemArray1 = new String[temp.size()];
+				String[] returnedArray1 = temp.toArray(itemArray1);
+				String[] itemArray2 = new String[templ.size()];
+				String[] returnedArray2 = templ.toArray(itemArray2);
 
-			// convert string lists to string arrays
+				grid.setAdapter(new TodayAdapter(this, returnedArray1,
+						returnedArray2));
+				grid.setOnItemClickListener(new OnItemClickListener() {
 
+					@Override
+					public void onItemClick(AdapterView<?> parent, View view,
+							int position, long id) {
+						// TODO Auto-generated method stub
+						Toast.makeText(getApplicationContext(), "Clicked",
+								Toast.LENGTH_LONG).show();
+
+					}
+				});
+
+			} catch (Exception e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		} else {
 			String[] itemArray1 = new String[temp.size()];
 			String[] returnedArray1 = temp.toArray(itemArray1);
 			String[] itemArray2 = new String[templ.size()];
 			String[] returnedArray2 = templ.toArray(itemArray2);
 
-			grid.setAdapter(new TodayAdapter(this, returnedArray1, returnedArray2));
+			grid.setAdapter(new TodayAdapter(this, returnedArray1,
+					returnedArray2));
 			grid.setOnItemClickListener(new OnItemClickListener() {
 
 				@Override
@@ -96,10 +130,6 @@ public class TodayShow extends Activity {
 
 				}
 			});
-
-		} catch (Exception e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
 		}
 
 	}
