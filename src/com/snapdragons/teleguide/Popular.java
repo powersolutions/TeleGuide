@@ -156,7 +156,7 @@ public class Popular extends Activity {
 
 			DocumentBuilder db = dbf.newDocumentBuilder();
 
-			URL url = new URL("http://sharkz91.0fees.us/tele/shows.xml");
+			URL url = new URL("http://sharkz91.0fees.us/tele/popular.php");
 			InputStream stream = url.openStream();
 			// doc = docBuilder.parse(stream);
 			// InputSource is = new InputSource();
