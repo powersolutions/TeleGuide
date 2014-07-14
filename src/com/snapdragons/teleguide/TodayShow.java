@@ -42,7 +42,9 @@ import android.util.Log;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.View.OnClickListener;
 import android.widget.AdapterView;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.Toast;
 import android.widget.AdapterView.OnItemClickListener;
@@ -57,12 +59,15 @@ public class TodayShow extends Activity {
 		grid = (GridView) findViewById(R.id.gridView1);
 		image=(ImageView)findViewById(R.id.imag_today);
 		image.setVisibility(View.VISIBLE);
+		
+		
 		init();
 	}
 
 	// local variables
 	ImageView image;
 	GridView grid;
+	
 	String xml;
 	Document doc = null;
 
@@ -107,7 +112,7 @@ public class TodayShow extends Activity {
 		image.setVisibility(View.GONE);
 		grid.setVisibility(View.VISIBLE);
 
-		String[] itemArray1 = new String[text.size()];
+		final String[] itemArray1 = new String[text.size()];
 		String[] returnedArray1 = text.toArray(itemArray1);
 		String[] itemArray2 = new String[img.size()];
 		String[] returnedArray2 = img.toArray(itemArray2);
@@ -119,9 +124,9 @@ public class TodayShow extends Activity {
 			public void onItemClick(AdapterView<?> parent, View view,
 					int position, long id) {
 				// TODO Auto-generated method stub
-				Toast.makeText(getApplicationContext(), "Clicked",
-						Toast.LENGTH_LONG).show();
-
+				//Toast.makeText(getApplicationContext(), itemArray1[position].toString(),
+					//	Toast.LENGTH_LONG).show();
+				startActivity(new Intent(TodayShow.this, Show.class));
 			}
 		});
 	}
@@ -234,5 +239,7 @@ public class TodayShow extends Activity {
 			}
 		}
 	}
+
+	
 
 }
