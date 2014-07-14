@@ -53,6 +53,7 @@ public class Login extends Activity implements OnClickListener{
 			break;
 		case R.id.btn_register:
 			startActivity(new Intent(Login.this, Register.class));
+			this.finish();
 			break;
 		case R.id.btncancel:
 			finish();

@@ -43,6 +43,7 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
+import android.widget.ImageView;
 import android.widget.Toast;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.GridView;
@@ -54,16 +55,19 @@ public class TodayShow extends Activity {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.today);
 		grid = (GridView) findViewById(R.id.gridView1);
+		image=(ImageView)findViewById(R.id.imag_today);
+		image.setVisibility(View.VISIBLE);
 		init();
 	}
 
 	// local variables
+	ImageView image;
 	GridView grid;
 	String xml;
 	Document doc = null;
 
-	static final List<String> temp = new ArrayList<String>();
-	static final List<String> templ = new ArrayList<String>();
+	static final List<String> text = new ArrayList<String>();
+	static final List<String> img = new ArrayList<String>();
 
 	public static Boolean state = false;
 
@@ -77,63 +81,50 @@ public class TodayShow extends Activity {
 
 	private void init() {
 		
-
-		if (temp.size() == 0 && templ.size() == 0) {
+		if (text.size() == 0 && img.size() == 0) {
 			try {
-				
+
 				// read the xml from the web
-				temp.clear();
-				templ.clear();
+
 				readXml();
 
 				// convert string lists to string arrays
-
-				String[] itemArray1 = new String[temp.size()];
-				String[] returnedArray1 = temp.toArray(itemArray1);
-				String[] itemArray2 = new String[templ.size()];
-				String[] returnedArray2 = templ.toArray(itemArray2);
-
-				grid.setAdapter(new TodayAdapter(this, returnedArray1,
-						returnedArray2));
-				grid.setOnItemClickListener(new OnItemClickListener() {
-
-					@Override
-					public void onItemClick(AdapterView<?> parent, View view,
-							int position, long id) {
-						// TODO Auto-generated method stub
-						Toast.makeText(getApplicationContext(), "Clicked",
-								Toast.LENGTH_LONG).show();
-
-					}
-				});
+				loadDate();
 
 			} catch (Exception e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
 		} else {
-			String[] itemArray1 = new String[temp.size()];
-			String[] returnedArray1 = temp.toArray(itemArray1);
-			String[] itemArray2 = new String[templ.size()];
-			String[] returnedArray2 = templ.toArray(itemArray2);
 
-			grid.setAdapter(new TodayAdapter(this, returnedArray1,
-					returnedArray2));
-			grid.setOnItemClickListener(new OnItemClickListener() {
-
-				@Override
-				public void onItemClick(AdapterView<?> parent, View view,
-						int position, long id) {
-					// TODO Auto-generated method stub
-					Toast.makeText(getApplicationContext(), "Clicked",
-							Toast.LENGTH_LONG).show();
-
-				}
-			});
+			loadDate();
 		}
 
 	}
 
+	private void loadDate() {
+
+		image.setVisibility(View.GONE);
+		grid.setVisibility(View.VISIBLE);
+
+		String[] itemArray1 = new String[text.size()];
+		String[] returnedArray1 = text.toArray(itemArray1);
+		String[] itemArray2 = new String[img.size()];
+		String[] returnedArray2 = img.toArray(itemArray2);
+
+		grid.setAdapter(new TodayAdapter(this, returnedArray1, returnedArray2));
+		grid.setOnItemClickListener(new OnItemClickListener() {
+
+			@Override
+			public void onItemClick(AdapterView<?> parent, View view,
+					int position, long id) {
+				// TODO Auto-generated method stub
+				Toast.makeText(getApplicationContext(), "Clicked",
+						Toast.LENGTH_LONG).show();
+
+			}
+		});
+	}
 	private Boolean checkcon() {
 
 		Thread timer = new Thread() {
@@ -205,7 +196,7 @@ public class TodayShow extends Activity {
 
 			DocumentBuilder db = dbf.newDocumentBuilder();
 
-			URL url = new URL("http://sharkz91.0fees.us/tele/shows.xml");
+			URL url = new URL("http://sharkz91.0fees.us/tele/popular.php");
 			InputStream stream = url.openStream();
 			// doc = docBuilder.parse(stream);
 			// InputSource is = new InputSource();
@@ -236,9 +227,9 @@ public class TodayShow extends Activity {
 			if (node.getNodeType() == node.ELEMENT_NODE) {
 				Element elem = (Element) node;
 
-				temp.add(elem.getElementsByTagName("name").item(0)
+				text.add(elem.getElementsByTagName("name").item(0)
 						.getTextContent());
-				templ.add(elem.getElementsByTagName("link").item(0)
+				img.add(elem.getElementsByTagName("link").item(0)
 						.getTextContent());
 			}
 		}

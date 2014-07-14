@@ -15,7 +15,7 @@
         android:orientation="vertical" >
 
         <EditText
-            android:id="@+id/editText1"
+            android:id="@+id/txt_reg_email"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:ems="10"
@@ -26,7 +26,7 @@
         </EditText>
 
         <EditText
-            android:id="@+id/editText2"
+            android:id="@+id/txt_reg_pass"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:ems="10"
@@ -34,7 +34,7 @@
             android:inputType="textPassword" />
 
         <EditText
-            android:id="@+id/editText3"
+            android:id="@+id/txt_reg_repass"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:ems="10"

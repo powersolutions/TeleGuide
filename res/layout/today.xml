@@ -14,4 +14,10 @@
     android:layout_height="fill_parent">
     </GridView>
 
+    <ImageView
+        android:id="@+id/imag_today"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:src="@drawable/noi" />
+
 </LinearLayout>

@@ -15,40 +15,34 @@ import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
 import android.os.AsyncTask;
-import android.sax.StartElementListener;
-import android.widget.TextView;
 import android.widget.Toast;
 
-public class loginActivity extends AsyncTask<String, Void, String> {
+public class RegisterActivity extends AsyncTask<String, Void, String> {
 
-	private TextView status;
 	private Context context;
-
 	private Activity activity;
 	private ProgressDialog pd;
 
-	public loginActivity(Context context, Activity activity) {
+	public RegisterActivity(Context context, Activity activity) {
 		this.activity = activity;
-		this.context = context;
-
 	}
 
 	protected void onPreExecute() {
-		pd = ProgressDialog.show(activity, "Signing in",
-				"Please wait while we are signing you in..");
+		pd = ProgressDialog.show(activity, "Registering...",
+				"Please wait while we are registering you...");
 	}
 
 	@Override
 	protected String doInBackground(String... arg0) {
 		// TODO Auto-generated method stub
 		try {
-			String username = (String) arg0[0];
+			String email = (String) arg0[0];
 			String password = (String) arg0[1];
 			// String link =
 			// "http://192.168.40.36:2345/cs/dbandroid.php?username="
 			// +username+"&password="+password;
-			String link = "http://sharkz91.0fees.us/tele/login.php?username="
-					+ username + "&password=" + password;
+			String link = "http://sharkz91.0fees.us/tele/reg.php?email='"
+					+ email + "'&pass='" + password + "'";
 			URL url = new URL(link);
 			HttpClient client = new DefaultHttpClient();
 			HttpGet request = new HttpGet();
@@ -73,13 +67,13 @@ public class loginActivity extends AsyncTask<String, Void, String> {
 	@Override
 	protected void onPostExecute(String result) {
 		pd.cancel();
-		//Toast.makeText(activity, result, Toast.LENGTH_SHORT).show();
+		// Toast.makeText(activity, result, Toast.LENGTH_SHORT).show();
 		if (result.equals("true")) {
-			activity.startActivity(new Intent(activity, MainActivity.class));
+			activity.startActivity(new Intent(activity, Login.class));
 			activity.finish();
 		} else {
-		
-			Toast.makeText(activity, "Invalid username or password",
+
+			Toast.makeText(activity, "This email already have an account",
 					Toast.LENGTH_SHORT).show();
 		}
 	}
