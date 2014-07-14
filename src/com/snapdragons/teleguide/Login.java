@@ -21,7 +21,7 @@ public class Login extends Activity implements OnClickListener{
 
 	Button login, cancel, register;
 	TextView email, pass;
-	private static String status;
+	//private static String status;
 	
 	private void init() {
 		login = (Button)findViewById(R.id.btnlogin);
@@ -29,6 +29,12 @@ public class Login extends Activity implements OnClickListener{
 		
 		email = (TextView)findViewById(R.id.txt_loginEmail);
 		pass =(TextView)findViewById(R.id.txt_loginPass);
+		
+		register=(Button)findViewById(R.id.btn_register);
+		register.setOnClickListener(this);
+		
+		cancel = (Button)findViewById(R.id.btncancel);
+		cancel.setOnClickListener(this);
 	}
 
 	public void test(){
@@ -45,7 +51,12 @@ public class Login extends Activity implements OnClickListener{
 			new loginActivity(this, Login.this).execute(username, password);
 			
 			break;
-
+		case R.id.btn_register:
+			startActivity(new Intent(Login.this, Register.class));
+			break;
+		case R.id.btncancel:
+			finish();
+			break;
 		
 		}
 	}
