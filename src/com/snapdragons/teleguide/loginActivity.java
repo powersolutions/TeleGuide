@@ -22,8 +22,8 @@ import android.widget.Toast;
 public class loginActivity extends AsyncTask<String, Void, String> {
 
 	private TextView status;
+	
 	private Context context;
-
 	private Activity activity;
 	private ProgressDialog pd;
 

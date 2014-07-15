@@ -57,17 +57,16 @@ public class TodayShow extends Activity {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.today);
 		grid = (GridView) findViewById(R.id.gridView1);
-		image=(ImageView)findViewById(R.id.imag_today);
+		image = (ImageView) findViewById(R.id.imag_today);
 		image.setVisibility(View.VISIBLE);
-		
-		
+
 		init();
 	}
 
 	// local variables
 	ImageView image;
 	GridView grid;
-	
+
 	String xml;
 	Document doc = null;
 
@@ -83,9 +82,8 @@ public class TodayShow extends Activity {
 	 * "http://i.stack.imgur.com/aZkGv.jpg" };
 	 */
 
-
 	private void init() {
-		
+
 		if (text.size() == 0 && img.size() == 0) {
 			try {
 
@@ -124,12 +122,22 @@ public class TodayShow extends Activity {
 			public void onItemClick(AdapterView<?> parent, View view,
 					int position, long id) {
 				// TODO Auto-generated method stub
-				//Toast.makeText(getApplicationContext(), itemArray1[position].toString(),
-					//	Toast.LENGTH_LONG).show();
-				startActivity(new Intent(TodayShow.this, Show.class));
+				// Toast.makeText(getApplicationContext(),
+				// itemArray1[position].toString(),
+				// Toast.LENGTH_LONG).show();
+				// startActivity(new Intent(TodayShow.this, Show.class));
+
+				String showName = itemArray1[position].toString();
+				Bundle basket = new Bundle();
+				basket.putString("key", showName);
+				Intent a = new Intent(TodayShow.this, Show.class);
+				a.putExtras(basket);
+				// startActivity(a);
+				startActivityForResult(a, 0);
 			}
 		});
 	}
+
 	private Boolean checkcon() {
 
 		Thread timer = new Thread() {
@@ -239,7 +247,5 @@ public class TodayShow extends Activity {
 			}
 		}
 	}
-
-	
 
 }
