@@ -28,15 +28,16 @@ import android.widget.GridView;
 import android.widget.ImageView;
 import android.widget.AdapterView.OnItemClickListener;
 
-public class PopularActivity extends AsyncTask<String, Void, ArrayList<String>> {
+public class MyShowActivity extends AsyncTask<String, Void, ArrayList<String>> {
 
 	private Context context;
 	private Activity activity;
 	private ImageView image;
 	private GridView grid;
 	private ProgressDialog pd;
+	private String uid;
 
-	public PopularActivity(Context context, Activity activity, ImageView image,
+	public MyShowActivity(Context context, Activity activity, ImageView image,
 			GridView grid) {
 		this.context = context;
 		this.activity = activity;
@@ -51,6 +52,7 @@ public class PopularActivity extends AsyncTask<String, Void, ArrayList<String>> 
 	@Override
 	protected ArrayList<String> doInBackground(String... params) {
 		// TODO Auto-generated method stub
+		uid = params[0];
 		try {
 			readXml();
 		} catch (Exception e) {
@@ -85,7 +87,7 @@ public class PopularActivity extends AsyncTask<String, Void, ArrayList<String>> 
 		image.setVisibility(View.GONE);
 		grid.setVisibility(View.VISIBLE);
 
-		grid.setAdapter(new PopularAdapter(activity, text, img));
+		grid.setAdapter(new MyShowAdapter(activity, text, img));
 		grid.setOnItemClickListener(new OnItemClickListener() {
 
 			@Override
@@ -142,7 +144,7 @@ public class PopularActivity extends AsyncTask<String, Void, ArrayList<String>> 
 
 			DocumentBuilder db = dbf.newDocumentBuilder();
 
-			URL url = new URL("http://sharkz91.0fees.us/tele/popular.php");
+			URL url = new URL("http://sharkz91.0fees.us/tele/myshows.php?id="+ uid);
 			InputStream stream = url.openStream();
 			// doc = docBuilder.parse(stream);
 			// InputSource is = new InputSource();

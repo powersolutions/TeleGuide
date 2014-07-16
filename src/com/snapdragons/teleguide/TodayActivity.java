@@ -36,6 +36,7 @@ public class TodayActivity extends AsyncTask<String, Void, ArrayList<String>> {
 	private ImageView image;
 	private GridView grid;
 	private ProgressDialog pd;
+	private String uid;
 
 	public TodayActivity(Context context, Activity activity, ImageView image,
 			GridView grid) {
@@ -43,6 +44,7 @@ public class TodayActivity extends AsyncTask<String, Void, ArrayList<String>> {
 		this.activity = activity;
 		this.image = image;
 		this.grid = grid;
+		
 	}
 
 	protected void onPreExecute() {
@@ -52,6 +54,7 @@ public class TodayActivity extends AsyncTask<String, Void, ArrayList<String>> {
 	@Override
 	protected ArrayList<String> doInBackground(String... params) {
 		// TODO Auto-generated method stub
+		uid=params[0];
 		try {
 			readXml();
 		} catch (Exception e) {
@@ -87,7 +90,7 @@ public class TodayActivity extends AsyncTask<String, Void, ArrayList<String>> {
 		grid.setVisibility(View.VISIBLE);
 
 		grid.setAdapter(new TodayAdapter(activity, text, img));
-		grid.setOnItemClickListener(new OnItemClickListener() {
+		/*grid.setOnItemClickListener(new OnItemClickListener() {
 
 			@Override
 			public void onItemClick(AdapterView<?> parent, View view,
@@ -109,7 +112,7 @@ public class TodayActivity extends AsyncTask<String, Void, ArrayList<String>> {
 				// startActivity(a);
 				activity.startActivityForResult(a, 0);
 			}
-		});
+		});*/
 	}
 
 	private void readXml() {
@@ -142,8 +145,8 @@ public class TodayActivity extends AsyncTask<String, Void, ArrayList<String>> {
 		try {
 
 			DocumentBuilder db = dbf.newDocumentBuilder();
-
-			URL url = new URL("http://sharkz91.0fees.us/tele/");
+			
+			URL url = new URL("http://sharkz91.0fees.us/tele/today.php?id="+uid);
 			InputStream stream = url.openStream();
 			// doc = docBuilder.parse(stream);
 			// InputSource is = new InputSource();

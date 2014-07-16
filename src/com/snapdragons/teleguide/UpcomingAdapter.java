@@ -14,13 +14,18 @@ import android.widget.BaseAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-public class PopularAdapter extends BaseAdapter {
+public class UpcomingAdapter extends BaseAdapter {
 
 	private Context context;
 	private final ArrayList<String> todayValues;
 	private final ArrayList<String> link;
 
-	public PopularAdapter(Context context,ArrayList<String> todayValues, ArrayList<String> link) {
+	/*public TodayAdapter(Context context, String[] todayValues, String[] link) {
+		this.context = context;
+		this.todayValues = todayValues;
+		this.link = link;
+	}*/
+	public UpcomingAdapter(Context context, ArrayList<String> todayValues, ArrayList<String> link) {
 		this.context = context;
 		this.todayValues = todayValues;
 		this.link = link;
@@ -57,28 +62,28 @@ public class PopularAdapter extends BaseAdapter {
 			gridview = new View(context);
 
 			// set layout from todayItem
-			gridview = inflater.inflate(R.layout.popularitem, null);
+			gridview = inflater.inflate(R.layout.upcomingitem, null);
 
 			// set value into text view
 			TextView textview = (TextView) gridview
-					.findViewById(R.id.popular_item_label);
+					.findViewById(R.id.grid_item_label_upcoming);
 
 			textview.setText(todayValues.get(position));
 
 			// set image
 			ImageView image = (ImageView) gridview
-					.findViewById(R.id.popular_item_image);
+					.findViewById(R.id.grid_item_image_upcoming);
 
-			// String today = todayValues.get(position);
+			//String today = todayValues.get(position);
 			String link1 = link.get(position);
 			Bitmap bmp;
-
+			
 			try {
 				URL url = new URL(link1);
 				bmp = BitmapFactory.decodeStream(url.openConnection()
 						.getInputStream());
 				image.setImageBitmap(bmp);
-
+				
 			} catch (IOException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
@@ -87,9 +92,10 @@ public class PopularAdapter extends BaseAdapter {
 		} else {
 			gridview = (View) convertView;
 		}
-		// todayValues.removeAll(todayValues);
-		// link.removeAll(link);
+		//todayValues.removeAll(todayValues);
+		//link.removeAll(link);
 		return gridview;
-
+		
 	}
+
 }

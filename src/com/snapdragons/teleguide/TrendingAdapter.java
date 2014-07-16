@@ -14,13 +14,13 @@ import android.widget.BaseAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-public class PopularAdapter extends BaseAdapter {
+public class TrendingAdapter extends BaseAdapter {
 
 	private Context context;
 	private final ArrayList<String> todayValues;
 	private final ArrayList<String> link;
 
-	public PopularAdapter(Context context,ArrayList<String> todayValues, ArrayList<String> link) {
+	public TrendingAdapter(Context context, ArrayList<String> todayValues, ArrayList<String> link) {
 		this.context = context;
 		this.todayValues = todayValues;
 		this.link = link;
@@ -57,17 +57,17 @@ public class PopularAdapter extends BaseAdapter {
 			gridview = new View(context);
 
 			// set layout from todayItem
-			gridview = inflater.inflate(R.layout.popularitem, null);
+			gridview = inflater.inflate(R.layout.trendingitem, null);
 
 			// set value into text view
 			TextView textview = (TextView) gridview
-					.findViewById(R.id.popular_item_label);
+					.findViewById(R.id.trending_item_label);
 
 			textview.setText(todayValues.get(position));
 
 			// set image
 			ImageView image = (ImageView) gridview
-					.findViewById(R.id.popular_item_image);
+					.findViewById(R.id.trending_item_image);
 
 			// String today = todayValues.get(position);
 			String link1 = link.get(position);

@@ -58,9 +58,7 @@ public class ViewShows extends TabActivity {
 			startActivity(new Intent(ViewShows.this, MyShows.class));
 
 			break;
-		case R.id.searchshows:
-			startActivity(new Intent(ViewShows.this, SearchShows.class));
-			break;
+		
 
 		case R.id.viewshows:
 			startActivity(new Intent(ViewShows.this, ViewShows.class));

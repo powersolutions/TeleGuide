@@ -4,5 +4,17 @@
     android:layout_height="match_parent"
     android:orientation="vertical" >
     
+<GridView
+        android:id="@+id/grid_myshows"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:numColumns="3" >
+    </GridView>
 
+    <ImageView
+        android:id="@+id/image_myshows"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:src="@drawable/noi" />
+    
 </LinearLayout>

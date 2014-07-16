@@ -18,25 +18,22 @@ import org.xml.sax.SAXException;
 import android.app.Activity;
 import android.app.ProgressDialog;
 import android.content.Context;
-import android.content.Intent;
 import android.os.AsyncTask;
-import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
-import android.widget.AdapterView;
 import android.widget.GridView;
 import android.widget.ImageView;
-import android.widget.AdapterView.OnItemClickListener;
 
-public class PopularActivity extends AsyncTask<String, Void, ArrayList<String>> {
+public class UpcomingActivity extends AsyncTask<String, Void, ArrayList<String>> {
 
 	private Context context;
 	private Activity activity;
 	private ImageView image;
 	private GridView grid;
 	private ProgressDialog pd;
+	private String uid;
 
-	public PopularActivity(Context context, Activity activity, ImageView image,
+	public UpcomingActivity(Context context, Activity activity, ImageView image,
 			GridView grid) {
 		this.context = context;
 		this.activity = activity;
@@ -51,6 +48,7 @@ public class PopularActivity extends AsyncTask<String, Void, ArrayList<String>> 
 	@Override
 	protected ArrayList<String> doInBackground(String... params) {
 		// TODO Auto-generated method stub
+		uid=params[0];
 		try {
 			readXml();
 		} catch (Exception e) {
@@ -85,8 +83,8 @@ public class PopularActivity extends AsyncTask<String, Void, ArrayList<String>> 
 		image.setVisibility(View.GONE);
 		grid.setVisibility(View.VISIBLE);
 
-		grid.setAdapter(new PopularAdapter(activity, text, img));
-		grid.setOnItemClickListener(new OnItemClickListener() {
+		grid.setAdapter(new UpcomingAdapter(activity, text, img));
+		/*grid.setOnItemClickListener(new OnItemClickListener() {
 
 			@Override
 			public void onItemClick(AdapterView<?> parent, View view,
@@ -108,7 +106,7 @@ public class PopularActivity extends AsyncTask<String, Void, ArrayList<String>> 
 				// startActivity(a);
 				activity.startActivityForResult(a, 0);
 			}
-		});
+		});*/
 	}
 
 	private void readXml() {
@@ -141,8 +139,8 @@ public class PopularActivity extends AsyncTask<String, Void, ArrayList<String>> 
 		try {
 
 			DocumentBuilder db = dbf.newDocumentBuilder();
-
-			URL url = new URL("http://sharkz91.0fees.us/tele/popular.php");
+			
+			URL url = new URL("http://sharkz91.0fees.us/tele/upcoming.php?id="+uid);
 			InputStream stream = url.openStream();
 			// doc = docBuilder.parse(stream);
 			// InputSource is = new InputSource();

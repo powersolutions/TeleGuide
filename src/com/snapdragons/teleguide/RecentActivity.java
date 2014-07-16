@@ -18,30 +18,28 @@ import org.xml.sax.SAXException;
 import android.app.Activity;
 import android.app.ProgressDialog;
 import android.content.Context;
-import android.content.Intent;
 import android.os.AsyncTask;
-import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
-import android.widget.AdapterView;
 import android.widget.GridView;
 import android.widget.ImageView;
-import android.widget.AdapterView.OnItemClickListener;
 
-public class PopularActivity extends AsyncTask<String, Void, ArrayList<String>> {
+public class RecentActivity extends AsyncTask<String, Void, ArrayList<String>> {
 
 	private Context context;
 	private Activity activity;
 	private ImageView image;
 	private GridView grid;
 	private ProgressDialog pd;
+	private String uid;
 
-	public PopularActivity(Context context, Activity activity, ImageView image,
+	public RecentActivity(Context context, Activity activity, ImageView image,
 			GridView grid) {
 		this.context = context;
 		this.activity = activity;
 		this.image = image;
 		this.grid = grid;
+
 	}
 
 	protected void onPreExecute() {
@@ -51,6 +49,7 @@ public class PopularActivity extends AsyncTask<String, Void, ArrayList<String>> 
 	@Override
 	protected ArrayList<String> doInBackground(String... params) {
 		// TODO Auto-generated method stub
+		uid = params[0];
 		try {
 			readXml();
 		} catch (Exception e) {
@@ -85,30 +84,24 @@ public class PopularActivity extends AsyncTask<String, Void, ArrayList<String>> 
 		image.setVisibility(View.GONE);
 		grid.setVisibility(View.VISIBLE);
 
-		grid.setAdapter(new PopularAdapter(activity, text, img));
-		grid.setOnItemClickListener(new OnItemClickListener() {
-
-			@Override
-			public void onItemClick(AdapterView<?> parent, View view,
-					int position, long id) {
-				// TODO Auto-generated method stub
-				// Toast.makeText(getApplicationContext(),
-				// itemArray1[position].toString(),
-				// Toast.LENGTH_LONG).show();
-				// startActivity(new Intent(TodayShow.this, Show.class));
-
-				String showName = text.get(position).toString();
-				// Toast.makeText(getApplicationContext(), showID.get(position),
-				// Toast.LENGTH_SHORT).show();
-				Bundle basket = new Bundle();
-				basket.putString("key", showName);
-				basket.putString("id", showID.get(position));
-				Intent a = new Intent(activity, Show.class);
-				a.putExtras(basket);
-				// startActivity(a);
-				activity.startActivityForResult(a, 0);
-			}
-		});
+		grid.setAdapter(new RecentAdapter(activity, text, img));
+		/*
+		 * grid.setOnItemClickListener(new OnItemClickListener() {
+		 * 
+		 * @Override public void onItemClick(AdapterView<?> parent, View view,
+		 * int position, long id) { // TODO Auto-generated method stub //
+		 * Toast.makeText(getApplicationContext(), //
+		 * itemArray1[position].toString(), // Toast.LENGTH_LONG).show(); //
+		 * startActivity(new Intent(TodayShow.this, Show.class));
+		 * 
+		 * String showName = text.get(position).toString(); //
+		 * Toast.makeText(getApplicationContext(), showID.get(position), //
+		 * Toast.LENGTH_SHORT).show(); Bundle basket = new Bundle();
+		 * basket.putString("key", showName); basket.putString("id",
+		 * showID.get(position)); Intent a = new Intent(activity, Show.class);
+		 * a.putExtras(basket); // startActivity(a);
+		 * activity.startActivityForResult(a, 0); } });
+		 */
 	}
 
 	private void readXml() {
@@ -142,7 +135,7 @@ public class PopularActivity extends AsyncTask<String, Void, ArrayList<String>> 
 
 			DocumentBuilder db = dbf.newDocumentBuilder();
 
-			URL url = new URL("http://sharkz91.0fees.us/tele/popular.php");
+			URL url = new URL("http://sharkz91.0fees.us/tele/recent.php?id="+ uid);
 			InputStream stream = url.openStream();
 			// doc = docBuilder.parse(stream);
 			// InputSource is = new InputSource();

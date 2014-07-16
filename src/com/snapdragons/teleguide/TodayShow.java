@@ -98,8 +98,8 @@ public class TodayShow extends Activity {
 
 			loadDate();
 		}*/
-
-		new TodayActivity(this, this, image, grid).execute();
+		String uid=((MyApplication)this.getApplication()).getuid();
+		new TodayActivity(this, this,image, grid).execute(uid);
 	}
 
 	
