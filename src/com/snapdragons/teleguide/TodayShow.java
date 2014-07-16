@@ -67,11 +67,7 @@ public class TodayShow extends Activity {
 	ImageView image;
 	GridView grid;
 
-	String xml;
-	Document doc = null;
-
-	static final List<String> text = new ArrayList<String>();
-	static final List<String> img = new ArrayList<String>();
+	
 
 	public static Boolean state = false;
 
@@ -84,7 +80,7 @@ public class TodayShow extends Activity {
 
 	private void init() {
 
-		if (text.size() == 0 && img.size() == 0) {
+		/*if (text.size() == 0 && img.size() == 0) {
 			try {
 
 				// read the xml from the web
@@ -101,42 +97,12 @@ public class TodayShow extends Activity {
 		} else {
 
 			loadDate();
-		}
+		}*/
 
+		new TodayActivity(this, this, image, grid).execute();
 	}
 
-	private void loadDate() {
-
-		image.setVisibility(View.GONE);
-		grid.setVisibility(View.VISIBLE);
-
-		final String[] itemArray1 = new String[text.size()];
-		String[] returnedArray1 = text.toArray(itemArray1);
-		String[] itemArray2 = new String[img.size()];
-		String[] returnedArray2 = img.toArray(itemArray2);
-
-		grid.setAdapter(new TodayAdapter(this, returnedArray1, returnedArray2));
-		grid.setOnItemClickListener(new OnItemClickListener() {
-
-			@Override
-			public void onItemClick(AdapterView<?> parent, View view,
-					int position, long id) {
-				// TODO Auto-generated method stub
-				// Toast.makeText(getApplicationContext(),
-				// itemArray1[position].toString(),
-				// Toast.LENGTH_LONG).show();
-				// startActivity(new Intent(TodayShow.this, Show.class));
-
-				String showName = itemArray1[position].toString();
-				Bundle basket = new Bundle();
-				basket.putString("key", showName);
-				Intent a = new Intent(TodayShow.this, Show.class);
-				a.putExtras(basket);
-				// startActivity(a);
-				startActivityForResult(a, 0);
-			}
-		});
-	}
+	
 
 	private Boolean checkcon() {
 
@@ -188,64 +154,8 @@ public class TodayShow extends Activity {
 		return false;
 	}
 
-	private void getXml() {
-		// get data from web
-		/*
-		 * try { // defaultHttpClient DefaultHttpClient httpClient = new
-		 * DefaultHttpClient(); HttpPost httpPost = new HttpPost(
-		 * "http://sharkz91.0fees.us/tele/shows.xml");
-		 * 
-		 * HttpResponse httpResponse = httpClient.execute(httpPost); HttpEntity
-		 * httpEntity = httpResponse.getEntity(); xml =
-		 * EntityUtils.toString(httpEntity);
-		 * 
-		 * } catch (UnsupportedEncodingException e) { e.printStackTrace(); }
-		 * catch (ClientProtocolException e) { e.printStackTrace(); } catch
-		 * (IOException e) { e.printStackTrace(); }
-		 */
-		// create the local xml file
-		DocumentBuilderFactory dbf = DocumentBuilderFactory.newInstance();
-		try {
+	
 
-			DocumentBuilder db = dbf.newDocumentBuilder();
-
-			URL url = new URL("http://sharkz91.0fees.us/tele/popular.php");
-			InputStream stream = url.openStream();
-			// doc = docBuilder.parse(stream);
-			// InputSource is = new InputSource();
-			// is.setCharacterStream(new StringReader(xml));
-			doc = db.parse(stream);
-
-		} catch (ParserConfigurationException e) {
-			Log.e("Error: ", e.getMessage());
-			// return null;
-		} catch (SAXException e) {
-			Log.e("Error: ", e.getMessage());
-			// return null;
-		} catch (IOException e) {
-			Log.e("Error: ", e.getMessage());
-			// return null;
-		}
-
-	}
-
-	private void readXml() {
-		getXml();
-		doc.getDocumentElement();
-
-		NodeList list = doc.getElementsByTagName("show");
-
-		for (int i = 0; i < list.getLength(); i++) {
-			Node node = list.item(i);
-			if (node.getNodeType() == node.ELEMENT_NODE) {
-				Element elem = (Element) node;
-
-				text.add(elem.getElementsByTagName("name").item(0)
-						.getTextContent());
-				img.add(elem.getElementsByTagName("link").item(0)
-						.getTextContent());
-			}
-		}
-	}
+	
 
 }

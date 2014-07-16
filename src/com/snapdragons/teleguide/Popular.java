@@ -48,8 +48,8 @@ public class Popular extends Activity {
 	String xml;
 	Document doc = null;
 
-	static final List<String> text = new ArrayList<String>();
-	static final List<String> img = new ArrayList<String>();
+	static final ArrayList<String> text = new ArrayList<String>();
+	static final ArrayList<String> img = new ArrayList<String>();
 
 	public static Boolean state = false;
 
@@ -85,7 +85,7 @@ public class Popular extends Activity {
 		String[] itemArray2 = new String[img.size()];
 		String[] returnedArray2 = img.toArray(itemArray2);
 
-		grid.setAdapter(new TodayAdapter(this, returnedArray1, returnedArray2));
+		grid.setAdapter(new TodayAdapter(this, text, img));
 		grid.setOnItemClickListener(new OnItemClickListener() {
 
 			@Override

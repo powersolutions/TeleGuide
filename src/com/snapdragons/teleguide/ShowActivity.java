@@ -38,6 +38,8 @@ public class ShowActivity extends AsyncTask<String, Void, ArrayList<String>> {
 	private ProgressDialog pd;
 	private ListView lv;
 	private TextView title, date, time, channel;
+	
+	private String showID;
 
 	public ShowActivity(Context content, Activity activity, ListView lv,
 			TextView title, TextView date, TextView time, TextView channel) {
@@ -52,10 +54,16 @@ public class ShowActivity extends AsyncTask<String, Void, ArrayList<String>> {
 
 	@Override
 	protected ArrayList<String> doInBackground(String... params) {
-		String show = params[0];
+		showID = params[0];
 		// TODO Auto-generated method stub
-		ArrayList<String> testList = new ArrayList<String>();
-		return testList;
+		//ArrayList<String> testList = new ArrayList<String>();
+		try {
+			readXml();
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return Aname;
 	}
 
 	protected void onPostExecute(final ArrayList<String> result) {
@@ -69,6 +77,9 @@ public class ShowActivity extends AsyncTask<String, Void, ArrayList<String>> {
 					int position, long id) {
 				// TODO Auto-generated method stub
 				title.setText(result.get(position));
+				date.setText(Adate.get(position));
+				time.setText(Atime.get(position));
+				channel.setText(Achannel.get(position));
 			}
 		});
 
@@ -76,8 +87,11 @@ public class ShowActivity extends AsyncTask<String, Void, ArrayList<String>> {
 
 	String xml;
 	Document doc = null;
-	ArrayList<String> text = new ArrayList<String>();
-	ArrayList<String> id = new ArrayList<String>();
+	ArrayList<String> Aname = new ArrayList<String>();
+	ArrayList<String>  Adate= new ArrayList<String>();
+	ArrayList<String>  Atime= new ArrayList<String>();
+	ArrayList<String>  Achannel= new ArrayList<String>();
+	
 
 	private void getXml() {
 		// get data from web
@@ -100,7 +114,7 @@ public class ShowActivity extends AsyncTask<String, Void, ArrayList<String>> {
 
 			DocumentBuilder db = dbf.newDocumentBuilder();
 
-			URL url = new URL("http://sharkz91.0fees.us/tele/popular.php");
+			URL url = new URL("http://sharkz91.0fees.us/tele/getShow.php?id=1");
 			InputStream stream = url.openStream();
 			// doc = docBuilder.parse(stream);
 			// InputSource is = new InputSource();
@@ -131,15 +145,15 @@ public class ShowActivity extends AsyncTask<String, Void, ArrayList<String>> {
 			if (node.getNodeType() == node.ELEMENT_NODE) {
 				Element elem = (Element) node;
 
-				text.add(elem.getElementsByTagName("name").item(0)
+				Aname.add(elem.getElementsByTagName("name").item(0)
 						.getTextContent());
-				id.add(elem.getElementsByTagName("name").item(0)
+				Adate.add(elem.getElementsByTagName("date").item(0)
 						.getTextContent());
-
-				/*
-				 * img.add(elem.getElementsByTagName("link").item(0)
-				 * .getTextContent());
-				 */
+				Atime.add(elem.getElementsByTagName("time").item(0)
+						.getTextContent());
+				Achannel.add(elem.getElementsByTagName("channel").item(0)
+						.getTextContent());
+				
 			}
 		}
 	}

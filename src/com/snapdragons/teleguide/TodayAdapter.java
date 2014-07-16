@@ -2,6 +2,7 @@ package com.snapdragons.teleguide;
 
 import java.io.IOException;
 import java.net.URL;
+import java.util.ArrayList;
 import java.util.List;
 
 import android.R.string;
@@ -20,10 +21,15 @@ import android.widget.TextView;
 public class TodayAdapter extends BaseAdapter {
 
 	private Context context;
-	private final String[] todayValues;
-	private final String[] link;
+	private final ArrayList<String> todayValues;
+	private final ArrayList<String> link;
 
-	public TodayAdapter(Context context, String[] todayValues, String[] link) {
+	/*public TodayAdapter(Context context, String[] todayValues, String[] link) {
+		this.context = context;
+		this.todayValues = todayValues;
+		this.link = link;
+	}*/
+	public TodayAdapter(Context context, ArrayList<String> todayValues, ArrayList<String> link) {
 		this.context = context;
 		this.todayValues = todayValues;
 		this.link = link;
@@ -32,7 +38,7 @@ public class TodayAdapter extends BaseAdapter {
 	@Override
 	public int getCount() {
 		// TODO Auto-generated method stub
-		return todayValues.length;
+		return todayValues.size();
 	}
 
 	@Override
@@ -66,14 +72,14 @@ public class TodayAdapter extends BaseAdapter {
 			TextView textview = (TextView) gridview
 					.findViewById(R.id.grid_item_label);
 
-			textview.setText(todayValues[position]);
+			textview.setText(todayValues.get(position));
 
 			// set image
 			ImageView image = (ImageView) gridview
 					.findViewById(R.id.grid_item_image);
 
 			//String today = todayValues.get(position);
-			String link1 = link[position];
+			String link1 = link.get(position);
 			Bitmap bmp;
 			
 			try {

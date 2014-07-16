@@ -12,7 +12,7 @@ import android.widget.TextView;
 
 public class Show extends Activity {
 
-	String showName;
+	String showName, showId;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -22,6 +22,7 @@ public class Show extends Activity {
 
 		Bundle gotBasket = getIntent().getExtras();
 		showName = gotBasket.getString("key");
+		showId=gotBasket.getString("id");
 
 		init();
 	}
@@ -41,7 +42,7 @@ public class Show extends Activity {
 		time=(TextView)findViewById(R.id.txt_showAirTime);
 		channel=(TextView)findViewById(R.id.txt_showChannel);
 
-		new ShowActivity(this, this, list, etitle,date, time, channel).execute(showName);
+		new ShowActivity(this, this, list, etitle,date, time, channel).execute(showId);
 	}
 
 }
