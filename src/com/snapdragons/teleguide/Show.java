@@ -6,11 +6,14 @@ import java.util.List;
 import android.app.Activity;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.view.View;
+import android.view.View.OnClickListener;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
 import android.widget.ListView;
 import android.widget.TextView;
 
-public class Show extends Activity {
+public class Show extends Activity implements OnClickListener {
 
 	String showName, showId;
 
@@ -29,6 +32,7 @@ public class Show extends Activity {
 
 	TextView title, etitle, date, time, channel;
 	ListView list;
+	Button save;
 
 	List<String> li = new ArrayList<String>();
 
@@ -41,8 +45,19 @@ public class Show extends Activity {
 		date=(TextView)findViewById(R.id.txt_showAirDate);
 		time=(TextView)findViewById(R.id.txt_showAirTime);
 		channel=(TextView)findViewById(R.id.txt_showChannel);
+		save=(Button)findViewById(R.id.btn_showSave);
+		save.setOnClickListener(this);
+			
+			
 
 		new ShowActivity(this, this, list, etitle,date, time, channel).execute(showId);
+	}
+
+	@Override
+	public void onClick(View v) {
+		// TODO Auto-generated method stub
+		String uid=((MyApplication)this.getApplication()).getuid();
+		new ShowSaveActiviy(this, this).execute(uid,showId);
 	}
 
 }

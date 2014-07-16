@@ -2,6 +2,7 @@ package com.snapdragons.teleguide;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -16,9 +17,11 @@ public class Login extends Activity implements OnClickListener{
 		// TODO Auto-generated method stub
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.login);
+		
 		init();
 	}
 
+	public static final String fileName = "file";
 	Button login, cancel, register;
 	TextView email, pass;
 	//private static String status;

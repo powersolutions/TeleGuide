@@ -26,10 +26,9 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.GridView;
 import android.widget.ImageView;
-import android.widget.Toast;
 import android.widget.AdapterView.OnItemClickListener;
 
-public class TodayActivity extends AsyncTask<String, Void, ArrayList<String>> {
+public class PopularActivity extends AsyncTask<String, Void, ArrayList<String>> {
 
 	private Context context;
 	private Activity activity;
@@ -37,7 +36,7 @@ public class TodayActivity extends AsyncTask<String, Void, ArrayList<String>> {
 	private GridView grid;
 	private ProgressDialog pd;
 
-	public TodayActivity(Context context, Activity activity, ImageView image,
+	public PopularActivity(Context context, Activity activity, ImageView image,
 			GridView grid) {
 		this.context = context;
 		this.activity = activity;
@@ -143,7 +142,7 @@ public class TodayActivity extends AsyncTask<String, Void, ArrayList<String>> {
 
 			DocumentBuilder db = dbf.newDocumentBuilder();
 
-			URL url = new URL("http://sharkz91.0fees.us/tele/");
+			URL url = new URL("http://sharkz91.0fees.us/tele/popular.php");
 			InputStream stream = url.openStream();
 			// doc = docBuilder.parse(stream);
 			// InputSource is = new InputSource();

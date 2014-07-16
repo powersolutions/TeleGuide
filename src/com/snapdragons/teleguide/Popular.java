@@ -39,7 +39,7 @@ public class Popular extends Activity {
 		grid = (GridView) findViewById(R.id.popularGrid);
 		image = (ImageView) findViewById(R.id.imageView1);
 		image.setVisibility(View.VISIBLE);
-		//grid.setVisibility(View.GONE);
+		// grid.setVisibility(View.GONE);
 		init();
 	}
 
@@ -54,144 +54,22 @@ public class Popular extends Activity {
 	public static Boolean state = false;
 
 	private void init() {
-		if (text.size() == 0 && img.size() == 0) {
-			try {
+		/*
+		 * if (text.size() == 0 && img.size() == 0) { try {
+		 * 
+		 * // read the xml from the web
+		 * 
+		 * readXml();
+		 * 
+		 * // convert string lists to string arrays loadDate();
+		 * 
+		 * } catch (Exception e) { // TODO Auto-generated catch block
+		 * e.printStackTrace(); } } else {
+		 * 
+		 * loadDate(); }
+		 */
 
-				// read the xml from the web
-
-				readXml();
-
-				// convert string lists to string arrays
-				loadDate();
-
-			} catch (Exception e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
-		} else {
-
-			loadDate();
-		}
-
+		new PopularActivity(this, this, image, grid).execute();
 	}
 
-	private void loadDate() {
-
-		image.setVisibility(View.GONE);
-		grid.setVisibility(View.VISIBLE);
-
-		String[] itemArray1 = new String[text.size()];
-		String[] returnedArray1 = text.toArray(itemArray1);
-		String[] itemArray2 = new String[img.size()];
-		String[] returnedArray2 = img.toArray(itemArray2);
-
-		grid.setAdapter(new TodayAdapter(this, text, img));
-		grid.setOnItemClickListener(new OnItemClickListener() {
-
-			@Override
-			public void onItemClick(AdapterView<?> parent, View view,
-					int position, long id) {
-				// TODO Auto-generated method stub
-				Toast.makeText(getApplicationContext(), "Clicked",
-						Toast.LENGTH_LONG).show();
-
-			}
-		});
-	}
-
-	private Boolean checkcon() {
-
-		Thread timer = new Thread() {
-			public void run() {
-				try {
-					Boolean stat = checkInternet();
-					if (stat == true) {
-
-						InetAddress testHost = InetAddress
-								.getByName("https://www.google.lk/?gws_rd=cr,ssl&ei=Ew-lU5zXO8eeugSa8ILYBg");
-						Boolean testState = testHost.isReachable(1000);
-						if (testState == true) {
-							state = true;
-
-						}
-
-					} else {
-						state = false;
-					}
-
-				} catch (Exception e) {
-					e.printStackTrace();
-				} finally {
-
-				}
-			}
-		};
-		timer.start();
-
-		// loaidng image to the imageview by link
-
-		return state;
-	}
-
-	private Boolean checkInternet() {
-		ConnectivityManager con = (ConnectivityManager) getApplicationContext()
-				.getSystemService(Context.CONNECTIVITY_SERVICE);
-		if (con != null) {
-			NetworkInfo[] info = con.getAllNetworkInfo();
-			if (info != null) {
-				for (int i = 0; i < info.length; i++) {
-					if (info[i].getState() == NetworkInfo.State.CONNECTED) {
-						return true;
-					}
-				}
-			}
-		}
-		return false;
-	}
-
-	private void getXml() {
-
-		DocumentBuilderFactory dbf = DocumentBuilderFactory.newInstance();
-		try {
-
-			DocumentBuilder db = dbf.newDocumentBuilder();
-
-			URL url = new URL("http://sharkz91.0fees.us/tele/popular.php");
-			InputStream stream = url.openStream();
-			// doc = docBuilder.parse(stream);
-			// InputSource is = new InputSource();
-			// is.setCharacterStream(new StringReader(xml));
-			doc = db.parse(stream);
-
-		} catch (ParserConfigurationException e) {
-			Log.e("Error: ", e.getMessage());
-			// return null;
-		} catch (SAXException e) {
-			Log.e("Error: ", e.getMessage());
-			// return null;
-		} catch (IOException e) {
-			Log.e("Error: ", e.getMessage());
-			// return null;
-		}
-
-	}
-
-	private void readXml() {
-		getXml();
-		doc.getDocumentElement();
-
-		NodeList list = doc.getElementsByTagName("show");
-
-		for (int i = 0; i < list.getLength(); i++) {
-			Node node = list.item(i);
-			if (node.getNodeType() == node.ELEMENT_NODE) {
-				Element elem = (Element) node;
-
-				text.add(elem.getElementsByTagName("name").item(0)
-						.getTextContent());
-				img.add(elem.getElementsByTagName("link").item(0)
-						.getTextContent());
-			}
-		}
-	}
 }

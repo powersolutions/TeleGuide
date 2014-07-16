@@ -38,7 +38,7 @@ public class ShowActivity extends AsyncTask<String, Void, ArrayList<String>> {
 	private ProgressDialog pd;
 	private ListView lv;
 	private TextView title, date, time, channel;
-	
+
 	private String showID;
 
 	public ShowActivity(Context content, Activity activity, ListView lv,
@@ -56,7 +56,7 @@ public class ShowActivity extends AsyncTask<String, Void, ArrayList<String>> {
 	protected ArrayList<String> doInBackground(String... params) {
 		showID = params[0];
 		// TODO Auto-generated method stub
-		//ArrayList<String> testList = new ArrayList<String>();
+		// ArrayList<String> testList = new ArrayList<String>();
 		try {
 			readXml();
 		} catch (Exception e) {
@@ -66,7 +66,12 @@ public class ShowActivity extends AsyncTask<String, Void, ArrayList<String>> {
 		return Aname;
 	}
 
+	protected void onPreExecute() {
+		pd = ProgressDialog.show(activity, "Loading...", "");
+	}
+
 	protected void onPostExecute(final ArrayList<String> result) {
+		pd.cancel();
 		ArrayAdapter<String> adp = new ArrayAdapter<String>(
 				activity.getBaseContext(), R.layout.showlistitems, result);
 		lv.setAdapter(adp);
@@ -88,10 +93,9 @@ public class ShowActivity extends AsyncTask<String, Void, ArrayList<String>> {
 	String xml;
 	Document doc = null;
 	ArrayList<String> Aname = new ArrayList<String>();
-	ArrayList<String>  Adate= new ArrayList<String>();
-	ArrayList<String>  Atime= new ArrayList<String>();
-	ArrayList<String>  Achannel= new ArrayList<String>();
-	
+	ArrayList<String> Adate = new ArrayList<String>();
+	ArrayList<String> Atime = new ArrayList<String>();
+	ArrayList<String> Achannel = new ArrayList<String>();
 
 	private void getXml() {
 		// get data from web
@@ -114,7 +118,8 @@ public class ShowActivity extends AsyncTask<String, Void, ArrayList<String>> {
 
 			DocumentBuilder db = dbf.newDocumentBuilder();
 
-			URL url = new URL("http://sharkz91.0fees.us/tele/getShow.php?id=1");
+			URL url = new URL("http://sharkz91.0fees.us/tele/getShow.php?id="
+					+ showID);
 			InputStream stream = url.openStream();
 			// doc = docBuilder.parse(stream);
 			// InputSource is = new InputSource();
@@ -153,7 +158,7 @@ public class ShowActivity extends AsyncTask<String, Void, ArrayList<String>> {
 						.getTextContent());
 				Achannel.add(elem.getElementsByTagName("channel").item(0)
 						.getTextContent());
-				
+
 			}
 		}
 	}
